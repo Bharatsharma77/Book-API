@@ -6,6 +6,12 @@ const mongoose = require("mongoose");
 // Database
 const database = require("./database/index");
 
+// Models
+const BookModel = require("./database/book");
+const AuthorModel = require("./database/author");
+const PublicationModel = require("./database/publication");
+
+
 // Initializing express
 const shapeAI = express();
 
@@ -31,9 +37,12 @@ Access          PUBLIC
 Parameters      NONE
 Method          GET
 */
-shapeAI.get("/", (req, res) => {
+shapeAI.get("/", async (req, res) => {
+  const getAllBooks = await BookModel.find();
   return res.json({ books: database.books });
 });
+
+
 
 /*
 Route           /is
